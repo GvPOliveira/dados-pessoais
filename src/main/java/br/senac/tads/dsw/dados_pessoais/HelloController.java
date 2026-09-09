@@ -23,7 +23,7 @@ public class HelloController {
 	public String helloManual() throws JsonProcessingException {
 
 		Mensagem mensagem = new Mensagem(
-			"Seu Nome Completo",
+			"Gabriel Vinicius",
 			"JSON gerado manualmente com ObjectMapper."
 		);
 
