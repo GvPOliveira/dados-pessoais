@@ -1,17 +1,45 @@
 package br.senac.tads.dsw.dados_pessoais;
 
+import br.senac.tads.dsw.dados_pessoais.validacao.SenhasIguais;
+import jakarta.validation.constraints.*;
+
 import java.time.LocalDate;
 import java.util.List;
 
+@SenhasIguais
 public class Pessoa {
 
 	private Integer id;
+	@NotBlank(message = "O username é obrigatório")
+	@Size(max = 50)
 	private String username;
+
+	@NotBlank(message = "O nome completo é obrigatório")
+	@Size(max = 100)
 	private String nome;
+
+	@NotBlank
+	@Size(max = 100)
+	@Email
 	private String email;
+
+	@Size(max = 20)
 	private String telefone;
+
+	@NotNull
+	@PastOrPresent
 	private LocalDate dataNascimento;
+
+	public String getSenhaRepeticao() {
+		return senhaRepeticao;
+	}
+
+	public void setSenhaRepeticao(String senhaRepeticao) {
+		this.senhaRepeticao = senhaRepeticao;
+	}
+
 	private String senha;
+	private String senhaRepeticao;
 	private List<String> conhecimentos;
 
 	public Pessoa(){}

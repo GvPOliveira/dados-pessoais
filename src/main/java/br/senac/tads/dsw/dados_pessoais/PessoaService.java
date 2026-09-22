@@ -8,7 +8,6 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import br.senac.tads.dsw.dados_pessoais.Pessoa;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
@@ -42,4 +41,12 @@ public class PessoaService {
 	public Optional<Pessoa> obterPessoa(String username) {
 		return Optional.ofNullable(mapPessoas.get(username));
 	}
+
+	public Pessoa incluirNovaPessoa(Pessoa pessoa) {
+		pessoa.setId(contador.incrementAndGet());
+		mapPessoas.put(pessoa.getUsername(), pessoa);
+		return pessoa;
+	}
+
+
 }
