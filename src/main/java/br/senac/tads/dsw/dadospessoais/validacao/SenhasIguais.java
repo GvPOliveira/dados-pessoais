@@ -1,4 +1,4 @@
-package br.senac.tads.dsw.dados_pessoais.validacao;
+package br.senac.tads.dsw.dadospessoais.validacao;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

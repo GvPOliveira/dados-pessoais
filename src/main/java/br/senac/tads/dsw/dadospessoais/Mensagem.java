@@ -1,4 +1,4 @@
-package br.senac.tads.dsw.dados_pessoais;
+package br.senac.tads.dsw.dadospessoais;
 public class Mensagem {
 	private String nome;
 	private String texto;

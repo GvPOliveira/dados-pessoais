@@ -1,4 +1,4 @@
-package br.senac.tads.dsw.dados_pessoais;
+package br.senac.tads.dsw.dadospessoais;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

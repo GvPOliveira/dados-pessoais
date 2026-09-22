@@ -1,13 +1,13 @@
-package br.senac.tads.dsw.dados_pessoais;
+package br.senac.tads.dsw.dadospessoais;
 
-import br.senac.tads.dsw.dados_pessoais.validacao.SenhasIguais;
+import br.senac.tads.dsw.dadospessoais.validacao.SenhasIguais;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @SenhasIguais
-public class Pessoa {
+public class PessoaDto {
 
 	private Integer id;
 	@NotBlank(message = "O username é obrigatório")
@@ -42,9 +42,9 @@ public class Pessoa {
 	private String senhaRepeticao;
 	private List<String> conhecimentos;
 
-	public Pessoa(){}
+	public PessoaDto(){}
 
-	public Pessoa(Integer id, String username, String nome, String email, String telefone, LocalDate dataNascimento) {
+	public PessoaDto(Integer id, String username, String nome, String email, String telefone, LocalDate dataNascimento) {
 		this.id = id;
 		this.username = username;
 		this.nome = nome;
@@ -69,11 +69,11 @@ public class Pessoa {
 		this.username = username;
 	}
 
-	public String getName() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setName(String name) {
+	public void setNome(String name) {
 		this.nome = name;
 	}
 
