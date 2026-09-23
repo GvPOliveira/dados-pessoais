@@ -81,7 +81,7 @@
   // Buscar e exibir a lista de pessoas
   document.getElementById('btnListar').addEventListener('click', async () => {
     try {
-      const httpResp = await fetch('/pessoas');
+      const httpResp = await fetch('http://localhost:8080/pessoas');
       if (!httpResp.ok) {
         throw new Error('Erro HTTP ' + httpResp.status);
       }
