@@ -18,9 +18,9 @@ import org.springframework.web.server.ResponseStatusException;
 @RequestMapping("/pessoas")
 public class PessoaController {
 
-	private final br.senac.tads.dsw.dadospessoais.PessoaService pessoaService;
+	private final PessoaService pessoaService;
 
-	public PessoaController(br.senac.tads.dsw.dadospessoais.PessoaService pessoaService) {
+	public PessoaController(PessoaService pessoaService) {
 		this.pessoaService = pessoaService;
 	}
 
@@ -65,6 +65,12 @@ public class PessoaController {
 
 		return optPessoa.get();
 	}
+
+	@GetMapping("/busca")
+	public ResponseEntity<List<PessoaDto>> buscarPessoas(@RequestParam("q") String termo) {
+		return ResponseEntity.ok(pessoaService.buscarPessoas(termo));
+	}
+
 	@PutMapping("/{username}")
 	public ResponseEntity<?> atualizar(@PathVariable("username") String username,
 									   @RequestBody @Valid PessoaAlteracaoDto pessoa) {
@@ -78,6 +84,7 @@ public class PessoaController {
 		pessoaService.removerPessoa(username);
 		return ResponseEntity.noContent().build(); // HTTP 204
 	}
+
 	@ExceptionHandler(NaoEncontradoException.class)
 	public ResponseEntity<ProblemDetail> tratarExcecao(NaoEncontradoException ex) {
 		ProblemDetail pd = ProblemDetail.forStatusAndDetail(
