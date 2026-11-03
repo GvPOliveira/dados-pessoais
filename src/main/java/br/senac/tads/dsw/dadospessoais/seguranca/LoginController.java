@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,21 +16,27 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
 	private final AuthenticationManager authenticationManager;
+	private final JwtService jwtService;
 
-	public LoginController(AuthenticationManager authenticationManager) {
+	public LoginController(AuthenticationManager authenticationManager, JwtService jwtService) {
 		this.authenticationManager = authenticationManager;
+		this.jwtService = jwtService;
 	}
 
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
 		try {
-			authenticationManager.authenticate(
+			Authentication auth = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(
 					loginDto.getUsername(), loginDto.getSenha()
 				)
 			);
 
-			return ResponseEntity.ok(Map.of("token", "token-fixo-provisorio-sem-significado"));
+
+			UsuarioSistema usuario = (UsuarioSistema) auth.getPrincipal();
+
+			String token = jwtService.gerarToken(usuario);
+			return ResponseEntity.ok(Map.of("token", token));
 
 		} catch (BadCredentialsException e) {
 			return ResponseEntity
